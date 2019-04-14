@@ -4,12 +4,12 @@ HOST = "localhost"
 PORT = 5000
 soket.bind((HOST,PORT))
 
-print ("Kullanıcı bekleniyor.")
-soket.listen(1)
+print ("Server is running on",PORT)
+soket.listen(50)
 baglanti,adres = soket.accept()
-print ("Bir bağlantı kabul edildi.", adres)
-baglanti.send("Hoşgeldiniz efendim , hoşgeldiniz.")
+print ("Client is online:", adres)
+msg = "Your connection is accepted."
+msg = msg.encode()
+baglanti.send(msg)
 data = baglanti.recv(1024)
 print (data)
-print(tes)
-soket.close()
