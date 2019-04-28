@@ -15,4 +15,4 @@ jsonData = json.dumps(client)
 while True:
     print("You are online!")
     serviceSocket.sendto(jsonData.encode(),(HOST,PORT))
-    time.sleep(60)
+    time.sleep(5)
