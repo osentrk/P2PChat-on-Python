@@ -4,7 +4,7 @@ import json
 
 soket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 soket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-HOST = "192.168.1.255"
+HOST = "192.168.1.23"
 PORT = 5000
 soket.bind((HOST,PORT))
 
@@ -27,9 +27,10 @@ while 1:
         for x in range(1,i,1):
             if(recJson["username"] == clients[x]["username"]):
                 isNew = False
-            elif(x==i-1):
+                break;
+            else:
                 isNew = True
-        if(isNew):
+        if(isNew == True):
             clients[i] = {"username":recJson["username"],"ip_address":recJson["ip_address"]}
             i = i + 1
             isNew = False
