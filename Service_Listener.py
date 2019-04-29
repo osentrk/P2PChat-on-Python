@@ -1,5 +1,7 @@
 import socket
 import json
+
+
 soket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 soket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 HOST = "192.168.1.255"
@@ -17,7 +19,7 @@ while 1:
     msg, clientAddress = soket.recvfrom(1024)
     msg = msg.decode()
     recJson = json.loads(msg)
-    recJson["ip_address"] = clientAddress
+    recJson["ip_address"] = clientAddress[0]
     if i == 1:
         clients[i] = {"username": recJson["username"], "ip_address": recJson["ip_address"]}
         i = i + 1
@@ -34,4 +36,6 @@ while 1:
 
     print("{} ({}) is online".format(recJson["username"],recJson["ip_address"]))
     print("ONLINE LIST : {}".format(clients))
+    with open('onlineList.json', 'w') as json_file:
+        json_file.write(json.dumps(clients))
     print("---------------------------------------------------------------------")
