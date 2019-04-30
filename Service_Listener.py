@@ -4,14 +4,19 @@ import json
 
 soket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 soket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-HOST = "192.168.1.23"
+
+ip = socket.gethostbyname(socket.gethostname()).split(".")
+ip = "{}.{}.{}.255".format(ip[0],ip[1],ip[2])
+
+
+HOST = ip
 PORT = 5000
 soket.bind((HOST,PORT))
 
 i = 1
 isNew = False
 
-print ("Server is running on",PORT)
+print ("Service is listening on {}:{}".format(HOST,PORT))
 
 clients = {}
 
