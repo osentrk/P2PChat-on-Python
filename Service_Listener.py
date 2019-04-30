@@ -8,7 +8,6 @@ soket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 ip = socket.gethostbyname(socket.gethostname()).split(".")
 ip = "{}.{}.{}.255".format(ip[0],ip[1],ip[2])
 
-
 HOST = ip
 PORT = 5000
 soket.bind((HOST,PORT))

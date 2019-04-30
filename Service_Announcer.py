@@ -13,7 +13,7 @@ PORT = 5000
 username = input("What is your username?: ")
 client = {
     "username":username,
-    "ip_address":"192.168.1.15"
+    "ip_address":ip
 }
 jsonData = json.dumps(client)
 while True:

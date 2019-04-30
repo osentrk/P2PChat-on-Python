@@ -1,19 +1,14 @@
 import socket
-soket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
-HOST = "192.168.1.23"
+soket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+soket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+
+username = input("Username: ")
+
+HOST = "192.168.1.255"
 PORT = 5000
 
-soket.connect((HOST,PORT))
-data = soket.recv(1024)
-data = data.decode()
-print(data)
 while True:
-
-
-    k_msg = input("-> ")
+    k_msg = input("{}: ".format(username))
     k_msg = k_msg.encode()
-    soket.send(k_msg)
-
-soket.close()
-
+    soket.sendto(k_msg,(HOST,PORT))
