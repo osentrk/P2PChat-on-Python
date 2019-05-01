@@ -28,7 +28,7 @@ def control(u):
             isOnline = True
     if(isOnline == False):
         print("{} is not online.".format(u))
-
+#l
 def connect(ip):
     try:
         TCPHost = ip

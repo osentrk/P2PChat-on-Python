@@ -18,7 +18,7 @@ isNew = False
 print ("Service is listening on {}:{}".format(HOST,PORT))
 
 clients = {}
-
+#l
 while 1:
     msg, clientAddress = soket.recvfrom(1024)
     msg = msg.decode()
