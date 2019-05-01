@@ -19,11 +19,11 @@ isNew = False
 print ("Service is listening on {}:{}".format(HOST,PORT))
 
 clients = {}
-
+#l
 while 1:
     msg, clientAddress = soket.recvfrom(1024)
     msg = msg.decode()
-    recJson = json.loads(msg)
+    recJson = json.loads(msg) #burada patladı
     recJson["ip_address"] = clientAddress[0]
     if i == 1:
         clients[i] = {"username": recJson["username"], "ip_address": recJson["ip_address"]}
