@@ -7,6 +7,11 @@ with open('onlineList.json') as json_file:
     clients = json.load(json_file)
 
 
+class colors: # You may need to change color settings in iPython
+    RED = '\033[31m'
+    ENDC = '\033[m'
+    GREEN = '\033[32m'
+
 def onlineList():
     print("ONLINE LIST")
     for i in clients:
@@ -18,32 +23,29 @@ def control(u):
     isOnline = False
     for x in clients:
         if(clients[str(x)]["username"] == u):
-            print("IP bulundu {}".format(u))
             connect(clients[str(x)]["ip_address"])
+            #return clients[str(x)]["ip_address"]
             isOnline = True
     if(isOnline == False):
         print("{} is not online.".format(u))
 
 def connect(ip):
-
-    TCPHost = ip
-    print(TCPHost)
-    TCPPort = 5001
-    tcpSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    tcpSocket.settimeout(5.0)
     try:
-        tcpSocket.connect((TCPHost, TCPPort))
-        print("You will chat with {}".format(ip))
+        TCPHost = ip
+        TCPPort = 5001
+        print("Connecting..")
         while 1:
-            tm = input("> ")
+            tcpSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            tcpSocket.settimeout(5.0)
+            tcpSocket.connect((TCPHost, TCPPort))
+            tm = input("You -> {} ".format(ip))
             if (tm == "exit"):
                 break;
             tcpSocket.send(tm.encode())
             tcpSocket.close()
-    except:
-        print("User is offline!")
-        tcpSocket.close()
-
+    except socket.error:
+        print("{} is not online right now.".format(ip))
+        print(colors.RED + "is not online" + colors.ENDC)
 
 if __name__ == '__main__':
     while True:
