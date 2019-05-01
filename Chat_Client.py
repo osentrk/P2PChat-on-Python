@@ -28,7 +28,7 @@ def control(u):
             isOnline = True
     if(isOnline == False):
         print("{} is not online.".format(u))
-#l
+
 def connect(ip):
     try:
         TCPHost = ip
@@ -38,7 +38,7 @@ def connect(ip):
             tcpSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             tcpSocket.settimeout(5.0)
             tcpSocket.connect((TCPHost, TCPPort))
-            tm = input("You -> {} ".format(ip))
+            tm = input("You -> {}: ".format(ip))
             if (tm == "exit"):
                 break;
             tcpSocket.send(tm.encode())
