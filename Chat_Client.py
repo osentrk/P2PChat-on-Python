@@ -8,27 +8,34 @@ with open('onlineList.json') as json_file:
 
 
 class colors: # You may need to change color settings in iPython
-    RED = '\033[31m'
+    RED = '\033[91m'
     ENDC = '\033[m'
     GREEN = '\033[32m'
 
 def onlineList():
     print("ONLINE LIST")
     for i in clients:
-        print(i)
         print("{} {}".format(clients[str(i)]["username"],clients[str(i)]["ip_address"]))
     print("----------------------------------")
+
+chatUser = ""
+chatIP = ""
+def getInfo(ip):
+    for x in clients:
+        if(clients[str(x)]["ip_address"] == ip):
+            global chatUser,chatIP
+            chatUser = clients[str(x)]["username"]
+            chatIP = clients[str(x)]["ip_address"]
 
 def control(u):
     isOnline = False
     for x in clients:
         if(clients[str(x)]["username"] == u):
             connect(clients[str(x)]["ip_address"])
-            #return clients[str(x)]["ip_address"]
             isOnline = True
     if(isOnline == False):
         print("{} is not online.".format(u))
-#l
+
 def connect(ip):
     try:
         TCPHost = ip
@@ -44,29 +51,10 @@ def connect(ip):
             tcpSocket.send(tm.encode())
             tcpSocket.close()
     except socket.error:
-        print("{} is not online right now.".format(ip))
-        print(colors.RED + "is not online" + colors.ENDC)
+        print(colors.RED + " {"+ip+"} is not online right now." + colors.ENDC)
 
 if __name__ == '__main__':
     while True:
         onlineList()
         getUsername = input("Connect to: ")
         control(getUsername)
-
-
-
-
-
-
-
-
-
-
-# import socket
-#
-# s = socket.socket()
-# s.settimeout(5)   # 5 seconds
-# try:
-#     s.connect(('123.123.123.123', 12345))         # "random" IP address and port
-# except socket.error, exc:
-#     print "Caught exception socket.error : %s" % exc
