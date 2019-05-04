@@ -1,4 +1,4 @@
-# P2PChat-on-Pyhton
+# P2PChat-on-Python
 BAU CMP2204 Term Project
 
 This project created for CMP2204 - Introduction to Computer Networks
