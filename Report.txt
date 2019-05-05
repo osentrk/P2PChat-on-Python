@@ -1,0 +1,53 @@
+Development Platform: MacOS(Mojave,10.14.4)
+Python Version: 3.7.1
+Development IDE: PyCharm 2018.3
+Test on: MacOS, Windows.
+
+Features:
+    Service_Listener.py:
+        1. It is always listen local broadcast IP(e.g. 192.168.1.255) and store in onlineList.json where can find in main home path(/home/USER/)
+        2. onlineList.json stores username and ip address.
+        3. Local broadcast IP detects automatically.
+        Libraries:
+            socket: Used for network actions(e.g. listen or bind socket, send message to client socket etc.)
+            json: Used for dump and load clients data. It creates json file.
+            Path: To find the main path of the user who runs the program(e.g. /home/USER/)
+
+    Service_Announcer.py:
+        1. First, Service Announcer ask username and every 60 second it send json data(username,ipaddress) to local broadcast IP.
+        2. Local broadcast IP detects automatically.
+        Libraries:
+            socket: Used for network actions(e.g. listen or bind socket, send message to client socket etc.)
+            json: Used for dump and load clients data. It creates json file.
+            time: To wait x second.
+
+    Chat_Client.py:
+        1. Program gets user data from the onlineList.json and give information  which user is online.
+        2. User selects any online user to connect and type its username.
+        3. Program search username in online list and find the ip address and it starts TCP connection on port 5001.
+        4. Program send user's message and close the session.
+        Libraries:
+            socket: Used for network actions(e.g. listen or bind socket, send message to client socket etc.)
+            json: Used for dump and load clients data. It creates json file.
+            Path: To find the main path of the user who runs the program(e.g. /home/USER/)
+
+    Chat_Listener.py:
+        1. Programs receive message from sender on TCP port 5001 and display to receiver.
+        2. It creates chat log all messages with date-time information. Chat log can find in main home path(/home/USER/)
+        3. It waits messages from sender until you close it.
+        Libraries:
+            socket: Used for network actions(e.g. listen or bind socket, send message to client socket etc.)
+            json: Used for dump and load clients data. It creates json file.
+            Path: To find the main path of the user who runs the program(e.g. /home/USER/)
+            datetime: It gives date-time information.
+            errno: Used to send a meaningful error message to the user.
+
+Faced Problems:
+    Twice Announcer: Sometimes Service_Listener.py shows data twice, although Service_Announcer.py sends data once. I
+    examined the packets with Wireshark but I can't see any problem.
+
+    Connection Problem: If you re-open the Chat_Listener.py within 10 seconds, program can't connect the socket and it gives error.
+    It is related to operating system, it takes a while to kill the program.
+
+
+
