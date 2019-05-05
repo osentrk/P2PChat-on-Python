@@ -4,19 +4,18 @@ from pathlib import Path
 
 clients = {}
 
-try:
-    with open(str(Path.home())+'/onlineList.json') as json_file:
-        clients = json.load(json_file)
-except:
-    print("\033[91mOnline list cannot load from the file.\033[m")
-
-
 class colors:
     RED = '\033[91m'
     ENDC = '\033[m'
     GREEN = '\033[92m'
 
 def onlineList():
+    try:
+        with open(str(Path.home()) + '/onlineList.json') as json_file:
+            global clients
+            clients = json.load(json_file)
+    except:
+        print("\033[91mOnline list cannot load from the file.\033[m")
     print(colors.GREEN + "ONLINE LIST" + colors.ENDC)
     for i in clients:
         print("{}-) {} {}".format(i,clients[str(i)]["username"],clients[str(i)]["ip_address"]))
@@ -68,10 +67,15 @@ def connect(ip):
 
 
 if __name__ == '__main__':
-    print("\033[91mIn order to start conversation to any online user, type their username. Type \033[92mexit\033[m \033[91mto leave conversation.\033[m\r\n")
+    print("\033[91mIn order to start conversation to any online user, type their username. Type \033[92mexit\033[m \033[91mto leave conversation.\033[m")
+    print("\033[91mType \033[92mreload\033[m \033[91mto refresh online list.\033[m\r\n")
     while True:
         onlineList()
         username = input("Connect to: ")
-        if(control(username)):
-            connect(control(username))
+        if(username == "reload"):
+            continue;
+        else:
+            if(control(username)):
+                connect(control(username))
+
 
