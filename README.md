@@ -14,4 +14,4 @@ Please run the applications in the order given below.
 3-) Chat_Listener.py
 4-) Chat_Client.py
 
-Now, you can focus on Chat_Client.py and you can chat any online user.ö
+Now, you can focus on Chat_Client.py and you can chat any online user.
